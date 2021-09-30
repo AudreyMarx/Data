@@ -1,0 +1,12 @@
+SELECT p.nome,p.codPedido,substr(p.datapedido,1,10) AS DataPedido,i.codProdutoPdv AS SKU,i.descricao,sum(i.quantidade) AS Quantidade,
+	   CASE p.idfrn 
+           WHEN 4382
+               THEN 'PF'   
+           WHEN 3760
+               THEN 'PJ'  
+       END TipoCliente
+FROM dd_pedidos p
+JOIN dd_items i ON p.codPedido = i.codPedido_id
+WHERE substr(datapedido,1,10) LIKE '2020-10-12'
+GROUP BY p.nome,p.codPedido,substr(p.datapedido,1,10),i.codProdutoPdv,i.descricao,p.idfrn
+ORDER BY 1,2

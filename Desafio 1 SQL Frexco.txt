@@ -1,0 +1,4 @@
+SELECT substr(p.datapedido, 1, 10) AS Data, round(sum(i.vlrUnitLiq*i.quantidade),2) AS Faturamento, round(sum(i.quantidade*pr.weight),2) AS Peso
+FROM dd_pedidos p JOIN dd_items i ON p.codPedido = i.codPedido_id
+JOIN products pr ON pr.id = i.codprodutopdv
+GROUP BY substr(p.datapedido, 1, 10)
